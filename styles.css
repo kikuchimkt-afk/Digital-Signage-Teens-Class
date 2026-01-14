@@ -1,0 +1,136 @@
+/* ===========================================
+   ECCジュニア大学前 Digital Signage Slideshow
+   Nano Banana Pro Style
+   =========================================== */
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', 'M PLUS Rounded 1c', sans-serif;
+    background: #000;
+}
+
+/* Slideshow Container - 16:9 Aspect Ratio */
+.slideshow-container {
+    position: relative;
+    width: 100vw;
+    height: 56.25vw;
+    /* 16:9 */
+    max-height: 100vh;
+    max-width: 177.78vh;
+    /* 16:9 */
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    background: #000;
+}
+
+/* Individual Slides */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    pointer-events: none;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.slide.exiting {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* 
+   Image Styling
+   - Standard cover fit
+   - Updated for user-provided clean images (no text burn-in)
+*/
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* 
+   Text Overlay
+   - Positioned at BOTTOM 40% area
+   - NO background (transparent), floating text
+*/
+.text-overlay {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+    background: transparent;
+    padding: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Main Title - Neon Orange with Thick Black Outline */
+.main-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 900;
+    font-size: 7vw;
+    color: #FF5F1F;
+    /* Neon Orange */
+    margin-bottom: 2vh;
+    line-height: 1.1;
+    white-space: nowrap;
+
+    /* Text Stroke / Outline Effect */
+    -webkit-text-stroke: 3px #000;
+    paint-order: stroke fill;
+    text-shadow: 4px 4px 0 #000;
+}
+
+/* Subtitle - White/Cream with Black Outline */
+.subtitle {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-weight: 800;
+    font-size: 4.5vw;
+    color: #FFFFF0;
+    /* Ivory/Cream */
+
+    /* Text Stroke / Outline Effect */
+    -webkit-text-stroke: 2.5px #000;
+    paint-order: stroke fill;
+    text-shadow: 3px 3px 0 #000;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .main-title {
+        -webkit-text-stroke: 1.5px #000;
+    }
+
+    .subtitle {
+        -webkit-text-stroke: 1px #000;
+    }
+}
